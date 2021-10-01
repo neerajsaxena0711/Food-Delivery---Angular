@@ -1,0 +1,76 @@
+<ng-container *ngIf="products.length !=0">
+    <div class="container">
+        <div class="card-table">
+            <div class="cart-product">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of products; let i = index">
+                                <td class="product-name">{{item.name}}</td>
+                                <td><img class="cart-img"
+                                        [src]="item?.image!='' ? item.image : 'https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/migrated_attachments/meal-918638_1280-1.webp?itok=dMJGxEC2'"
+                                        alt=""></td>
+                                <td class="product-desc">{{item.description}}</td>
+                                <th class="product-price">{{item.price | currency:"INR":"symbol" }}</th>
+                                <td>
+                                    <button (click)="removeItem(item)" class="btn btn-danger"><i
+                                            class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-right pr-4">
+                                    <strong>Sub Total : {{subTotal | currency:"INR":"symbol"}}</strong>
+                                    <br />
+                                    <strong> Tax : {{taxInfo?.value}} %</strong>
+                                    <br />
+                                    <strong> Tax Applied : {{taxApplied | currency:"INR":"symbol" }}</strong>
+                                    <br />
+                                    <strong>Grand Total : {{grandTotal | currency:"INR":"symbol"}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-right w-100 pr-4 pb-4">
+                        <button (click)="clearCart()" class="btn btn-danger mr-3">Empty Cart</button>
+                        <button routerLink="/product" class="btn btn-dark mr-3">Order More</button>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reg-modal" (click)="proceed()">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="modal-title">Order Details</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>{{orderDetails | json}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="products.length ==0">
+    <div class="container">
+        <div class="center">
+            <img class="hungry-icon" src="../../../assets/hungry.png" alt="">
+            <h1 class="tag-line">Order Yummy Food</h1>
+            <button routerLink="/product" class="btn btn-dark">Order Now</button>
+        </div>
+    </div>
+</ng-container>

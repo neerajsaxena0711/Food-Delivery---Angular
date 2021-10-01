@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,YADQ,CACR,OAAO,AAAA,CACH,gBAAgB,CAAE,oBAAoB,CACzC,AAHL,AAII,YAJQ,CAIR,IAAI,AAAA,CACA,gBAAgB,CAAE,SAAS,CAC9B",
+    "sources": [
+        "../src/themes/light.scss"
+    ],
+    "names": [],
+    "file": "light.min.css"
+}

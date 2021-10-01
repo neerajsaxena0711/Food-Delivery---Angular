@@ -1,0 +1,73 @@
+<div style="background-color: gainsboro;" class="card-top container-fluid">
+
+    <app-carousel style="margin-top: 5%;" [images]="carouselImages"></app-carousel>
+
+    <mat-slide-toggle style="padding: 10px; margin-top: 10px;" (change)="vegToggle()" [checked]="isVeg" [(ngModel)]="isVeg">Veg Only
+    </mat-slide-toggle>
+
+    <div class="container mt-4">
+
+        <div class="row" *ngIf="itemList">
+            <ng-container *ngFor="let item of itemList | filter:searchKey:'category'">
+                <div class="col-lg-4 col-md-6 col-12 mt-4 h-100" *ngIf="!isVeg">
+                    <div class="card">
+                        <img class="card-img-top"
+                            [src]="item?.image!='' ? item.image : 'http://www.devafoodmart.com/static/images/food_default.png'"
+                            alt="" 
+                            (click)="enlargeImage(item.image)">
+                        <div class="card-body">
+                            <h3 class="card-title">{{item?.name}} <span class="item-category">({{item?.category}})
+                                </span> </h3>
+                            <p class="item-desc">{{item?.description ? item.description : 'Description: NA'}}</p>
+                            <!-- <h3 class="item-type">{{item?.item_type}}</h3> -->
+                            <img class="type-icon" *ngIf="item?.item_type =='veg'" src="../../../assets/veg.png">
+                            <img class="type-icon" *ngIf="item?.item_type =='non-veg'" src="../../../assets/nonveg.png">
+                            <p class='item-price'>{{item?.price | currency:"INR":"symbol"}}</p>
+                            <button *ngIf="!item?.added" class="btn btn-primary" (click)="addToCart(item)">Add To
+                                Cart</button>
+                            <button *ngIf="item?.added" class="btn btn-danger" (click)="removeFromCart(item)">Remove
+                                From Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12 mt-4 h-100" *ngIf="isVeg && item.item_type==='veg'">
+                    <div class="card">
+                        <img class="card-img-top"
+                            [src]="item?.image!='' ? item.image : 'http://www.devafoodmart.com/static/images/food_default.png'"
+                            alt="" >
+                        <div class="card-body" (click)="enlargeImage(item.image)">
+                            <h3 class="card-title">{{item?.name}} <span class="item-category">({{item?.category}})
+                                </span> </h3>
+                            <p class="item-desc">{{item?.description ? item.description : 'Description: NA'}}</p>
+                            <!-- <h3 class="item-type">{{item?.item_type}}</h3> -->
+                            <img class="type-icon" *ngIf="item?.item_type =='veg'" src="../../../assets/veg.png">
+                            <img class="type-icon" *ngIf="item?.item_type =='non-veg'" src="../../../assets/nonveg.png">
+                            <p class='item-price'>{{item?.price | currency:"INR":"symbol"}}</p>
+                            <button *ngIf="!item?.added" class="btn btn-primary" (click)="addToCart(item)">Add To
+                                Cart</button>
+                            <button *ngIf="item?.added" class="btn btn-danger" (click)="removeFromCart(item)">Remove
+                                From Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img class="modal-image" [src]="img">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

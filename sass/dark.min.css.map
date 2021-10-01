@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,WADO,CACP,OAAO,AAAA,CACH,gBAAgB,CAAE,OAAe,CAAC,UAAU,CAC/C",
+    "sources": [
+        "../src/themes/dark.scss"
+    ],
+    "names": [],
+    "file": "dark.min.css"
+}

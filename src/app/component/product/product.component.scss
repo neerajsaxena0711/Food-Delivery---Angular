@@ -1,0 +1,99 @@
+.card-top {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .25rem;
+}
+
+.item img {
+    width: 64px;
+}
+
+.item {
+    margin: 0px 15px;
+    text-align: center;
+}
+
+.item a:hover {
+    color: blue;
+}
+
+.card {
+    padding: 20px;
+}
+
+
+.card img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 15px;
+    transition: 0.3s ease-in-out;
+    object-fit: cover;
+}
+
+.card img:hover {
+    transition: 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+.modal-image{
+    height: 400px;
+    width: 400px;
+    object-fit: contain;
+}
+
+.card-img-top{
+    width: 100% !important;
+}
+
+.card-title{
+    font-weight: bold;
+    margin-bottom: 5px;
+    min-height:3.5em;
+}
+
+.card-text{
+    margin-bottom: 5px;
+}
+
+.item-type{
+    margin-bottom: 5px;
+}
+
+.type-icon{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.item-category{
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: saddlebrown;
+}
+
+.item-price{
+    font-weight: bolder;
+}
+
+.item-desc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    min-height: max-content;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    color: gray;
+    min-height:2.5em;
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #22810a ;
+}
+
+:host ::ng-deep  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #22810a ;
+}

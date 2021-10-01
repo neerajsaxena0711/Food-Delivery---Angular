@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,AAAA,CACT,aAAa,CAAE,GAAG,CAClB,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,UAAU,CAAE,MAAM,CACrB,AACD,AAAA,YAAY,AAAA,CACR,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,EAAE,CACX,KAAK,CAAE,GAAG,CACV,GAAG,CAAE,GAAG,CACR,KAAK,CAAE,OAAe,CACzB",
+    "sources": [
+        "../app/component/header/header.component.scss"
+    ],
+    "names": [],
+    "file": "header.component.min.css"
+}

@@ -1,0 +1,17 @@
+<header>
+    <div class="navbar fixed-top navbar-dark bg-dark shadow-sm">
+        <div class="navbar-brand align-item-center d-flex">
+            <i style="font-size: 40px;" class="fas fa-hamburger"></i>
+            <strong>Yummy's</strong>
+            <div class="form-group position-relative">
+                <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)"
+                    placeholder="Search categories">
+                <!-- <span class="fas fa-search search-icon"></span> -->
+            </div>
+        </div>
+        <button routerLink="cart" class="btn btn-dark">
+            <i style="font-size:30px;" class="fas fa-cart-plus"></i>
+            <div class='badge bg-danger'>{{totalItem}}</div>
+        </button>
+    </div>
+</header>
