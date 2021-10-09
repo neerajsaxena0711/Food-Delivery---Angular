@@ -2,19 +2,19 @@
 
     <app-carousel style="margin-top: 5%;" [images]="carouselImages"></app-carousel>
 
-    <mat-slide-toggle style="padding: 10px; margin-top: 10px;" (change)="vegToggle()" [checked]="isVeg" [(ngModel)]="isVeg">Veg Only
+    <mat-slide-toggle style="padding: 10px; margin-top: 10px;" (change)="vegToggle()" [checked]="isVeg"
+        [(ngModel)]="isVeg">Veg Only
     </mat-slide-toggle>
 
     <div class="container mt-4">
 
-        <div class="row" *ngIf="itemList">
+        <div style="padding-bottom: 10px;" class="row" *ngIf="itemList">
             <ng-container *ngFor="let item of itemList | filter:searchKey:'category'">
                 <div class="col-lg-4 col-md-6 col-12 mt-4 h-100" *ngIf="!isVeg">
                     <div class="card">
                         <img class="card-img-top"
                             [src]="item?.image!='' ? item.image : 'http://www.devafoodmart.com/static/images/food_default.png'"
-                            alt="" 
-                            (click)="enlargeImage(item.image)">
+                            alt="" (click)="enlargeImage(item.image)">
                         <div class="card-body">
                             <h3 class="card-title">{{item?.name}} <span class="item-category">({{item?.category}})
                                 </span> </h3>
@@ -23,10 +23,17 @@
                             <img class="type-icon" *ngIf="item?.item_type =='veg'" src="../../../assets/veg.png">
                             <img class="type-icon" *ngIf="item?.item_type =='non-veg'" src="../../../assets/nonveg.png">
                             <p class='item-price'>{{item?.price | currency:"INR":"symbol"}}</p>
-                            <button *ngIf="!item?.added" class="btn btn-primary" (click)="addToCart(item)">Add To
-                                Cart</button>
-                            <button *ngIf="item?.added" class="btn btn-danger" (click)="removeFromCart(item)">Remove
-                                From Cart</button>
+                            <div style="text-align: center;">
+                                <button *ngIf="!item?.added" class="btn btn-primary" (click)="addToCart(item)">Add To
+                                    Cart</button>
+                            </div>
+                            <!-- <button *ngIf="item?.added" class="btn btn-danger" (click)="removeFromCart(item)">Remove
+                                From Cart</button> -->
+                            <div *ngIf="item?.added" class="text-center w-100 pr-4">
+                                <button class="btn btn-success mr-3" (click)="qtyInc(item)">+</button>
+                                <button class="btn btn-dark mr-3">{{item.qty}}</button>
+                                <button class="btn btn-danger" (click)="qtyDec(item)">-</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -35,7 +42,7 @@
                     <div class="card">
                         <img class="card-img-top"
                             [src]="item?.image!='' ? item.image : 'http://www.devafoodmart.com/static/images/food_default.png'"
-                            alt="" >
+                            alt="">
                         <div class="card-body" (click)="enlargeImage(item.image)">
                             <h3 class="card-title">{{item?.name}} <span class="item-category">({{item?.category}})
                                 </span> </h3>
@@ -44,10 +51,17 @@
                             <img class="type-icon" *ngIf="item?.item_type =='veg'" src="../../../assets/veg.png">
                             <img class="type-icon" *ngIf="item?.item_type =='non-veg'" src="../../../assets/nonveg.png">
                             <p class='item-price'>{{item?.price | currency:"INR":"symbol"}}</p>
-                            <button *ngIf="!item?.added" class="btn btn-primary" (click)="addToCart(item)">Add To
-                                Cart</button>
-                            <button *ngIf="item?.added" class="btn btn-danger" (click)="removeFromCart(item)">Remove
-                                From Cart</button>
+                            <div style="text-align: center;">
+                                <button *ngIf="!item?.added" class="btn btn-primary" (click)="addToCart(item)">Add To
+                                    Cart</button>
+                            </div>
+                            <!-- <button *ngIf="item?.added" class="btn btn-danger" (click)="removeFromCart(item)">Remove
+                                From Cart</button> -->
+                            <div *ngIf="item?.added" class="text-center w-100 pr-4">
+                                <button class="btn btn-success mr-3" (click)="qtyInc(item)">+</button>
+                                <button class="btn btn-dark mr-3">{{item.qty}}</button>
+                                <button class="btn btn-danger" (click)="qtyDec(item)">-</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,4 +84,5 @@
             </div>
         </div>
 
+        <!-- Toast -->
     </div>

@@ -21,11 +21,16 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private dataShare: DataShareService) { }
 
   ngOnInit(): void {
-    this.cartService.getProducts().subscribe(res => {
-      this.products = res;
-      this.getSubtotalAmount();
-      this.getTotalAmount();
-    });
+    this.getItemsFromLocalStrg();
+    // this.cartService.getProducts().subscribe((res:any) => {
+    //   // console.log('The cart page', this.products);
+    //     this.checkIfItemExists();
+    //     // if (!this.products){
+    //     //   this.products=res;
+    //     //   this.getSubtotalAmount();
+    //     //   this.getTotalAmount();
+    //     // }
+    // });
 
     this.cartService.getTaxAmt().subscribe(res => {
       this.taxApplied = res;
@@ -50,11 +55,16 @@ export class CartComponent implements OnInit {
   }
 
   clearCart() {
+    this.products = [];
+    this.subTotal = 0;
+    this.grandTotal = 0;
+    window.localStorage.setItem('cartItems', this.products);
     this.cartService.clearCart();
   }
 
   removeItem(item: any) {
     this.cartService.removeCartItem(item);
+    window.localStorage.setItem('cartItems', JSON.stringify(this.cartService.cartItemList));
   }
 
   proceed() {
@@ -67,7 +77,24 @@ export class CartComponent implements OnInit {
     this.orderDetails['totalAmt'] = this.grandTotal;
     this.orderDetails['subAmt'] = this.subTotal;
     this.orderDetails['taxApplied'] = this.taxApplied;
-    console.log(JSON.stringify(this.orderDetails))
+    // console.log(JSON.stringify(this.orderDetails))
+  }
+
+  getItemsFromLocalStrg() {
+    let res: any = window.localStorage.getItem('cartItems');
+    if (res)
+    // if (typeof res == 'object') {
+      if (res) {
+        res = JSON.parse(res);
+        this.products = res;
+        this.cartService.cartItemList = res;
+        this.cartService.productList.next(this.products);
+        this.getSubtotalAmount();
+        this.getTotalAmount();
+      // }
+    } else {
+      return;
+    }
   }
 
 }

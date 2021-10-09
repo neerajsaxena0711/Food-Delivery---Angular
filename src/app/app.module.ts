@@ -13,6 +13,7 @@ import { CarouselComponent } from './component/carousel/carousel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     FormsModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

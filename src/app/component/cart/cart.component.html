@@ -3,13 +3,14 @@
         <div class="card-table">
             <div class="cart-product">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" style="text-align:center">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Image</th>
                                 <th>Description</th>
                                 <th>Price</th>
+                                <th>QTY</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,6 +21,7 @@
                                         alt=""></td>
                                 <td class="product-desc">{{item.description}}</td>
                                 <th class="product-price">{{item.price | currency:"INR":"symbol" }}</th>
+                                <th class="product-price">{{item.qty}}</th>
                                 <td>
                                     <button (click)="removeItem(item)" class="btn btn-danger"><i
                                             class="fas fa-trash-alt"></i></button>

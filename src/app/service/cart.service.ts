@@ -34,6 +34,18 @@ export class CartService {
     this.isVeg.next(value);
   }
 
+  setQty(product:any, qty:number){
+    this.cartItemList.forEach((cartItem:any) => {
+      if (cartItem.id === product.id){
+        cartItem.qty = qty;
+        // console.log('Item pushed', JSON.stringify(cartItem));
+      }
+    });
+    // console.log('Item list', JSON.stringify(this.cartItemList));
+    this.productList.next(this.cartItemList);
+    this.getSubTotalAmt();
+  }
+
   addToCart(product: any) {
     this.cartItemList.push(product);
     this.productList.next(this.cartItemList);
@@ -43,7 +55,7 @@ export class CartService {
   getSubTotalAmt(): number {
     let subTotal = 0;
     this.cartItemList.map((x: any) => {
-      subTotal += x.price;
+      subTotal += (x.price)*(x.qty);
     });
     this.getTotalAmt()
     return subTotal;
@@ -52,7 +64,7 @@ export class CartService {
   getTotalAmt(): number {
     let total = 0;
     this.cartItemList.map((x: any) => {
-      total += x.price;
+      total += (x.price)*(x.qty);
     });
     return this.calTax(total);
   }
