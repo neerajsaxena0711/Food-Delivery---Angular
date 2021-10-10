@@ -1,12 +1,12 @@
 <div style="background-color: gainsboro;" class="card-top container-fluid">
 
-    <app-carousel style="margin-top: 5%;" [images]="carouselImages"></app-carousel>
+    <app-carousel *ngIf='itemList' style="margin-top: 5%;" [images]="carouselImages"></app-carousel>
 
-    <mat-slide-toggle style="padding: 10px; margin-top: 10px;" (change)="vegToggle()" [checked]="isVeg"
+    <mat-slide-toggle *ngIf='itemList' style="padding: 10px; margin-top: 10px;" (change)="vegToggle()" [checked]="isVeg"
         [(ngModel)]="isVeg">Veg Only
     </mat-slide-toggle>
 
-    <div class="container mt-4">
+    <div *ngIf='itemList' class="container mt-4">
 
         <div style="padding-bottom: 10px;" class="row" *ngIf="itemList">
             <ng-container *ngFor="let item of itemList | filter:searchKey:'category'">
@@ -84,5 +84,10 @@
             </div>
         </div>
 
-        <!-- Toast -->
+    </div>
+
+    <div *ngIf='!itemList' class="loading-indicator">
+        <mat-spinner color="accent"></mat-spinner>
+    </div>
+
     </div>

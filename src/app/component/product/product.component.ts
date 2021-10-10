@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
 import { DataShareService } from 'src/app/shared/data-share.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 declare var $: any;
-
 
 @Component({
   selector: 'app-product',
@@ -24,45 +23,50 @@ export class ProductComponent implements OnInit {
   constructor(private api: ApiService, private cartService: CartService, private dataShare: DataShareService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    //Api call to get the data
     this.api.getItems().subscribe((res: any) => {
       if (res) {
         this.itemList = res['items'];
-        this.itemList = this.itemList.map((item:any)=> ({ ...item, qty: 0 }));
+        this.itemList = this.itemList.map((item: any) => ({ ...item, qty: 0 }));
         this.carouselImages = res['carousel_images'];
         this.dataShare.setTaxInfo(res['tax_applicable']);
         let taxInfo: any = {};
         taxInfo['value'] = res['tax_applicable']['value'];
         taxInfo['type'] = res['tax_applicable']['type'];
         window.localStorage.setItem("taxInfo", JSON.stringify(taxInfo));
+        //Check if there are items in cart (Local Storage)
         this.checkIfItemExists(this.itemList);
       }
     });
 
+    //Subscribing to the observable to get the search term.
     this.cartService.search.subscribe((val: any) => {
       this.searchKey = val;
     });
 
+    //Subscribing to the observable to get the vegNonveg flag.
     this.cartService.isVegorNonveg().subscribe((val: any) => {
       this.isVeg = val;
     });
   }
 
-  qtyInc(item:any){
-    if(item['qty']<10){
+
+  qtyInc(item: any) {
+    if (item['qty'] < 10) {
       item['qty'] += 1;
       this.cartService.setQty(item, item['qty']);
       window.localStorage.setItem('cartItems', JSON.stringify(this.cartService.cartItemList));
-    }else{
+    } else {
       this.showToast();
       //Show toast
     }
   }
 
-  qtyDec(item:any){
+  qtyDec(item: any) {
     item['qty'] -= 1;
-    if (item['qty']==0){
+    if (item['qty'] == 0) {
       this.removeFromCart(item);
-    }else{
+    } else {
       this.cartService.setQty(item, item['qty']);
       window.localStorage.setItem('cartItems', JSON.stringify(this.cartService.cartItemList));
     }
@@ -89,14 +93,15 @@ export class ProductComponent implements OnInit {
   }
 
   vegToggle() {
+    //Set toggle veg-nonveg and emit the value
     this.cartService.setVeg(this.isVeg)
   }
 
-  showToast(){
+  showToast() {
     this.snackBar.open('You can add upto 10 items', 'Dismiss', {
       duration: 3000
     });
-    
+
   }
 
   checkIfItemExists(itemList: any) {
@@ -104,6 +109,9 @@ export class ProductComponent implements OnInit {
       if (!window.localStorage.getItem('cartItems')) {
         //Do nothing as local storage is empty.
       } else if (window.localStorage.getItem('cartItems')) {
+        //If the local storage contains items then ->
+        //Add the "added" & "qty" attribute to the 
+        //list recvd from the api.
         let list: any = []
         list = window.localStorage.getItem('cartItems');
         list = JSON.parse(list);
@@ -111,8 +119,8 @@ export class ProductComponent implements OnInit {
           list.forEach((cartItem: any) => {
             if (item.id === cartItem.id) {
               item['added'] = true;
-              item['qty'] =  cartItem.qty;
-              console.log('item is', item);
+              item['qty'] = cartItem.qty;
+              // console.log('item is', item);
             }
           });
           //Setting the local storage list to the cartService arr list.  
@@ -121,7 +129,7 @@ export class ProductComponent implements OnInit {
           //recvs the latest list.  
           this.cartService.productList.next(this.cartService.cartItemList);
           //Fn to cal subtotal amt.
-          this.cartService.getSubTotalAmt();
+          // this.cartService.getSubTotalAmt();
         }
       }
     });

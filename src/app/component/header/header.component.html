@@ -4,7 +4,7 @@
             <i style="font-size: 40px;" class="fas fa-hamburger"></i>
             <strong style="padding-left: 15px; align-items: center;">Yummy's</strong>
             <div class="form-group position-relative" >
-                <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)"
+                <input type="text" class="form-control" (click)="goToExplore()" [(ngModel)]="searchTerm" (keyup)="search($event)"
                     placeholder="Search categories">
                 <!-- <span class="fas fa-search search-icon"></span> -->
             </div>

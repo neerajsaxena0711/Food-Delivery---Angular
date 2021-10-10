@@ -21,21 +21,15 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private dataShare: DataShareService) { }
 
   ngOnInit(): void {
+    //Get items from local storage
     this.getItemsFromLocalStrg();
-    // this.cartService.getProducts().subscribe((res:any) => {
-    //   // console.log('The cart page', this.products);
-    //     this.checkIfItemExists();
-    //     // if (!this.products){
-    //     //   this.products=res;
-    //     //   this.getSubtotalAmount();
-    //     //   this.getTotalAmount();
-    //     // }
-    // });
-
+    //Subscribing to the observable for tax cal.
     this.cartService.getTaxAmt().subscribe(res => {
       this.taxApplied = res;
     })
 
+    //Reading the tax info from local storage.
+    //It get's set when there is a API call to get the info.
     this.taxInfo = (window.localStorage.getItem('taxInfo'));
     this.taxInfo = JSON.parse(this.taxInfo);
 
@@ -65,6 +59,8 @@ export class CartComponent implements OnInit {
   removeItem(item: any) {
     this.cartService.removeCartItem(item);
     window.localStorage.setItem('cartItems', JSON.stringify(this.cartService.cartItemList));
+    this.getSubtotalAmount();
+    this.getTotalAmount();
   }
 
   proceed() {
@@ -83,7 +79,6 @@ export class CartComponent implements OnInit {
   getItemsFromLocalStrg() {
     let res: any = window.localStorage.getItem('cartItems');
     if (res)
-    // if (typeof res == 'object') {
       if (res) {
         res = JSON.parse(res);
         this.products = res;
@@ -91,10 +86,9 @@ export class CartComponent implements OnInit {
         this.cartService.productList.next(this.products);
         this.getSubtotalAmount();
         this.getTotalAmount();
-      // }
-    } else {
-      return;
-    }
+      } else {
+        return;
+      }
   }
 
 }

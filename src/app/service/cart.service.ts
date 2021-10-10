@@ -38,10 +38,8 @@ export class CartService {
     this.cartItemList.forEach((cartItem:any) => {
       if (cartItem.id === product.id){
         cartItem.qty = qty;
-        // console.log('Item pushed', JSON.stringify(cartItem));
       }
     });
-    // console.log('Item list', JSON.stringify(this.cartItemList));
     this.productList.next(this.cartItemList);
     this.getSubTotalAmt();
   }
@@ -96,6 +94,7 @@ export class CartService {
       }
     });
     this.productList.next(this.cartItemList);
+    this.getSubTotalAmt();
   }
 
   clearCart() {

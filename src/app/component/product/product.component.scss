@@ -27,7 +27,6 @@
     padding: 20px;
 }
 
-
 .card img {
     width: 200px;
     height: 200px;
@@ -40,61 +39,75 @@
     transition: 0.3s ease-in-out;
     transform: scale(1.1);
 }
-.modal-image{
+
+.modal-image {
     height: 400px;
     width: 400px;
     object-fit: contain;
 }
 
-.card-img-top{
+.card-img-top {
     width: 100% !important;
 }
 
-.card-title{
+.card-title {
     font-weight: bold;
     margin-bottom: 5px;
-    min-height:3.5em;
+    min-height: 3.5em;
 }
 
-.card-text{
+.card-text {
     margin-bottom: 5px;
 }
 
-.item-type{
+.item-type {
     margin-bottom: 5px;
 }
 
-.type-icon{
+.type-icon {
     width: 20px !important;
     height: 20px !important;
 }
 
-.item-category{
+.item-category {
     margin-bottom: 5px;
     font-weight: bold;
     color: saddlebrown;
 }
 
-.item-price{
+.item-price {
     font-weight: bolder;
 }
 
-.item-desc{
+.item-desc {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     min-height: max-content;
-    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
     -webkit-box-orient: vertical;
     color: gray;
-    min-height:2.5em;
+    min-height: 2.5em;
 }
 
 :host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-    background-color: #22810a ;
+    background-color: #22810a;
 }
 
-:host ::ng-deep  .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-    background-color: #22810a ;
+:host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #22810a;
 }
 
+.loading-indicator {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
